@@ -60,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Category\Create.cshtml" />
     <None Include="Areas\Admin\Views\Category\Index.cshtml" />
   </ItemGroup>
 
