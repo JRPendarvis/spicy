@@ -132,7 +132,7 @@ namespace Spice.Areas.Admin.Controllers
 				return View();
 			}
 
-			return RedirectToAction("Edit",id);
+			return RedirectToAction("Edit",new { id });
 		}
 	}
 }
