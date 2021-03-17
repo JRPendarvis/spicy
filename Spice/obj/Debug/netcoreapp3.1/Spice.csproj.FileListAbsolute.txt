@@ -471,3 +471,9 @@ C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Error
 C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateButtonPartial.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateAndBackToListButton.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TableButtonPartial.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BackToListButton.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_EditAndBackToListButton.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DeleteAndBackToListButton.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DetailsAndBackToListButton.cshtml.g.cs
