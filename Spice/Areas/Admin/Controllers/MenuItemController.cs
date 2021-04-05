@@ -68,10 +68,10 @@ namespace Spice.Areas.Admin.Controllers
 				var uploads = Path.Combine(webRootPath, "images");
 				var extention = Path.GetExtension(files[0].FileName);
 
-				using (var fileStream = new FileStream(Path.Combine(uploads, MenuItemVM.MenuItem.Id + extention),
+				await using (var fileStream = new FileStream(Path.Combine(uploads, MenuItemVM.MenuItem.Id + extention),
 					FileMode.Create))
 				{
-					files[0].CopyTo(fileStream);
+					await files[0].CopyToAsync(fileStream);
 				}
 
 				menuItemFromDb.Image = @"\images\" + MenuItemVM.MenuItem.Id + extention;
