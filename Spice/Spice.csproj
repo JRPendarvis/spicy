@@ -17,11 +17,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210322233306_addMenuToDataBase.cs" />
+    <Compile Remove="Data\Migrations\20210322233306_addMenuToDataBase.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210322233353_addMenuToDataBase2.cs" />
+    <Compile Remove="Data\Migrations\20210322233353_addMenuToDataBase2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Shared\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Customer\Controllers\HomeController.cs" />
   </ItemGroup>
@@ -70,6 +78,8 @@
     <None Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Category\Index.cshtml" />
     <None Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\MenuItem\Create.cshtml" />
+    <None Include="Areas\Admin\Views\MenuItem\Index.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Create.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Delete.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Details.cshtml" />
