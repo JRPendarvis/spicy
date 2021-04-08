@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CouponController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Customer\Controllers\HomeController.cs" />
@@ -78,7 +79,11 @@
     <None Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Category\Index.cshtml" />
     <None Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Coupon\Index.cshtml" />
     <None Include="Areas\Admin\Views\MenuItem\Create.cshtml" />
+    <None Include="Areas\Admin\Views\MenuItem\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\MenuItem\Details.cshtml" />
+    <None Include="Areas\Admin\Views\MenuItem\Edit.cshtml" />
     <None Include="Areas\Admin\Views\MenuItem\Index.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Create.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Delete.cshtml" />
