@@ -79,6 +79,10 @@
     <None Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Category\Index.cshtml" />
     <None Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Coupon\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Coupon\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Coupon\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Coupon\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Coupon\Index.cshtml" />
     <None Include="Areas\Admin\Views\MenuItem\Create.cshtml" />
     <None Include="Areas\Admin\Views\MenuItem\Delete.cshtml" />
