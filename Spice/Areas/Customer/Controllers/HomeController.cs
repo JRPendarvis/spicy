@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Spice.Data;
+using Spice.Models.ViewModels;
 
 namespace Spice.Controllers
 {
@@ -13,15 +16,24 @@ namespace Spice.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		private readonly ApplicationDbContext _db;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
 		{
 			_logger = logger;
+			_db = db;
 		}
 
-		public IActionResult Index()
+
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			var IndexVM = new IndexViewModel()
+			{
+				MenuItem  = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
+				Coupon    = await _db.Coupon.Where(c => c.IsActive).ToListAsync(),
+				Category  = await _db.Category.ToListAsync()
+			};
+			return View(IndexVM);
 		}
 
 		public IActionResult Privacy()

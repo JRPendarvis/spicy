@@ -478,3 +478,4 @@ C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_EditAndBackT
 C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DeleteAndBackToListButton.cshtml.g.cs
 C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DetailsAndBackToListButton.cshtml.g.cs
 C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_StatusMessage.cshtml.g.cs
+C:\Projects\spicy\Spice\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ThumbnailAreaPartial.cshtml.g.cs
