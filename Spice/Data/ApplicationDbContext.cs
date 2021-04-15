@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Spice.Areas.Identity.Pages.Account;
 using Spice.Models;
 
 namespace Spice.Data
@@ -16,6 +17,7 @@ namespace Spice.Data
 		public DbSet<User> User { get; set; }
 		public DbSet<MenuItem> MenuItem { get; set; }
 		public DbSet<Coupon> Coupon { get; set; }
+		public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
 
 	}

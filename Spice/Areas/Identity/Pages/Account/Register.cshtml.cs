@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Spice.Utility;
 
 namespace Spice.Areas.Identity.Pages.Account
 {
@@ -23,17 +24,20 @@ namespace Spice.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
-            _userManager = userManager;
+            _userManager   = userManager;
             _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
+            _logger        = logger;
+            _emailSender   = emailSender;
+            _roleManager   = roleManager;
         }
 
         [BindProperty]
@@ -60,6 +64,17 @@ namespace Spice.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required] 
+            public string Name { get; set; }
+
+            public string StreetAddress { get; set; }
+            public string PhoneNumber { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string PostalCode { get; set; }
+
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -72,39 +87,71 @@ namespace Spice.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return Page();
+            
+            var user = new ApplicationUser()
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
+	            UserName      = Input.Email, 
+	            Email         = Input.Email,
+                Name          = Input.Name,
+                StreetAddress = Input.StreetAddress,
+                City          = Input.City,
+                State         = Input.State,
+                PostalCode    = Input.PostalCode,
+	            PhoneNumber   = Input.PhoneNumber
+            };
+            var result = await _userManager.CreateAsync(user, Input.Password);
+            if (result.Succeeded)
+            {
+	            if (!await _roleManager.RoleExistsAsync(SD.CustomerEndUser))
+	            {
+		            await _roleManager.CreateAsync(new IdentityRole(SD.CustomerEndUser));
+	            }
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+	            if (!await _roleManager.RoleExistsAsync(SD.ManagerUser))
+	            {
+		            await _roleManager.CreateAsync(new IdentityRole(SD.ManagerUser));
+	            }
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+	            if (!await _roleManager.RoleExistsAsync(SD.FrontDeskUser))
+	            {
+		            await _roleManager.CreateAsync(new IdentityRole(SD.FrontDeskUser));
+	            }
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+	            if (!await _roleManager.RoleExistsAsync(SD.KitchenUser))
+	            {
+		            await _roleManager.CreateAsync(new IdentityRole(SD.KitchenUser));
+	            }
+
+	            await _userManager.AddToRoleAsync(user, SD.ManagerUser);
+
+
+                 _logger.LogInformation("User created a new account with password.");
+             //
+	            // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+	            // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+	            // var callbackUrl = Url.Page(
+		           //  "/Account/ConfirmEmail",
+		           //  pageHandler: null,
+		           //  values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+		           //  protocol: Request.Scheme);
+             //
+	            // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+		           //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+	            // if (_userManager.Options.SignIn.RequireConfirmedAccount)
+	            // {
+		           //  return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+	            // }
+	            // else
+	            // {
+		            await _signInManager.SignInAsync(user, isPersistent: false);
+		            return LocalRedirect(returnUrl);
+	            // }
+            }
+            foreach (var error in result.Errors)
+            {
+	            ModelState.AddModelError(string.Empty, error.Description);
             }
 
             // If we got this far, something failed, redisplay form
