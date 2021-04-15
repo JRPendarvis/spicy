@@ -31,6 +31,8 @@ namespace Spice
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
 			services.AddIdentity<IdentityUser, IdentityRole>()
+				.AddDefaultTokenProviders()
+				.AddDefaultUI()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 			services.AddRazorPages().AddRazorRuntimeCompilation();
