@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Spice.Models;
 using Spice.Utility;
 
 namespace Spice.Areas.Identity.Pages.Account
@@ -85,6 +86,8 @@ namespace Spice.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+	        var role = Request.Form["rdUserRole"].ToString();
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (!ModelState.IsValid) return Page();
@@ -123,31 +126,47 @@ namespace Spice.Areas.Identity.Pages.Account
 		            await _roleManager.CreateAsync(new IdentityRole(SD.KitchenUser));
 	            }
 
-	            await _userManager.AddToRoleAsync(user, SD.ManagerUser);
-
-
-                 _logger.LogInformation("User created a new account with password.");
-             //
-	            // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-	            // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-	            // var callbackUrl = Url.Page(
-		           //  "/Account/ConfirmEmail",
-		           //  pageHandler: null,
-		           //  values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-		           //  protocol: Request.Scheme);
-             //
-	            // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-		           //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-	            // if (_userManager.Options.SignIn.RequireConfirmedAccount)
-	            // {
-		           //  return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-	            // }
-	            // else
-	            // {
+	            if (role == SD.KitchenUser)
+	            {
+		            await _userManager.AddToRoleAsync(user, SD.KitchenUser);
+                }
+                else if (role == SD.FrontDeskUser)
+	            {
+		            await _userManager.AddToRoleAsync(user, SD.FrontDeskUser);
+	            }
+	            else if (role == SD.ManagerUser)
+	            {
+		            await _userManager.AddToRoleAsync(user, SD.ManagerUser);
+	            }
+	            else
+	            {
+		            await _userManager.AddToRoleAsync(user, SD.CustomerEndUser);
 		            await _signInManager.SignInAsync(user, isPersistent: false);
 		            return LocalRedirect(returnUrl);
-	            // }
+	            }
+                
+                _logger.LogInformation("User created a new account with password.");
+
+                return RedirectToAction("Index", "User", new {area = "Admin"});
+                //
+                // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                // var callbackUrl = Url.Page(
+                //  "/Account/ConfirmEmail",
+                //  pageHandler: null,
+                //  values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                //  protocol: Request.Scheme);
+                //
+                // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                // if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                // {
+                //  return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                // }
+                // else
+                // {
+                // }
             }
             foreach (var error in result.Errors)
             {

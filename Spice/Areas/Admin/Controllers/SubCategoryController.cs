@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace Spice.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-	public class SubCategoryController : Controller
+	public class SubCategoryController : BaseController
 	{
-		private readonly ApplicationDbContext _db;
-
 		[TempData]
 		public string StatusMessage { get; set; }
 

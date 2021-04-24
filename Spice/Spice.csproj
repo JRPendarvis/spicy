@@ -28,10 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CouponController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Customer\Controllers\HomeController.cs" />
   </ItemGroup>
 
@@ -94,6 +96,7 @@
     <None Include="Areas\Admin\Views\SubCategory\Details.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Edit.cshtml" />
     <None Include="Areas\Admin\Views\SubCategory\Index.cshtml" />
+    <None Include="Areas\Admin\Views\User\Index.cshtml" />
   </ItemGroup>
 
 </Project>

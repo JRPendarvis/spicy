@@ -13,10 +13,8 @@ using Spice.Utility;
 
 namespace Spice.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-	public class MenuItemController : Controller
+	public class MenuItemController : BaseController
 	{
-		private readonly ApplicationDbContext _db;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 
 		[BindProperty]

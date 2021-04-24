@@ -9,11 +9,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace Spice.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-	public class CouponController : Controller
+	public class CouponController : BaseController
 	{
-		private readonly ApplicationDbContext _db;
-
 		public CouponController(ApplicationDbContext db)
 		{
 			_db = db;

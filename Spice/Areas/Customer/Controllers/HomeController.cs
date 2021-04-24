@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Spice.Data;
 using Spice.Models;
-using System;
-using System.Collections.Generic;
+using Spice.Models.ViewModels;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Spice.Data;
-using Spice.Models.ViewModels;
 
 namespace Spice.Controllers
 {

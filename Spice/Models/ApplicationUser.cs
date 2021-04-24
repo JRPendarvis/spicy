@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace Spice.Areas.Identity.Pages.Account
+namespace Spice.Models
 {
 	public class ApplicationUser: IdentityUser
 	{
